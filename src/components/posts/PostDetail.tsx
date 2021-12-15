@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import {styled} from '@mui/material/styles';
 import {useHistory, useParams} from "react-router-dom";
 import {useDeletePostMutation, useGetPostQuery, useUpdatePostMutation,} from '../../services/posts';
-import {Box, Button, Grid, Input, Paper, Slide, SlideProps, Stack,} from '@mui/material';
+import {Button, Grid, Paper, Slide, SlideProps, Stack,} from '@mui/material';
+import PostJsonDetail from './PostJsonDetail';
+import EditablePostName from "./EditPost";
 
 const Item = styled(Paper)(({theme}) => ({
     ...theme.typography.body2,
@@ -11,63 +13,6 @@ const Item = styled(Paper)(({theme}) => ({
     color: theme.palette.text.secondary,
 }));
 
-const EditablePostName = ({
-                              name: initialName,
-                              onUpdate,
-                              onCancel,
-                              isLoading = false,
-                          }: {
-    name: string
-    onUpdate: (name: string) => void
-    onCancel: () => void
-    isLoading?: boolean
-}) => {
-    const [name, setName] = useState(initialName)
-
-    const handleChange = ({
-                              target: {value},
-                          }: React.ChangeEvent<HTMLInputElement>) => setName(value)
-
-    const handleUpdate = () => onUpdate(name)
-    const handleCancel = () => onCancel()
-
-    return (
-        <Grid container spacing={4}>
-            <Grid item xs={6}>
-                <Input
-                    type="text"
-                    onChange={handleChange}
-                    value={name}
-                    disabled={isLoading}
-                />
-            </Grid>
-            <Grid item xs={3}>
-                <Button color="primary" onClick={handleUpdate}>
-                    Update
-                </Button>
-            </Grid>
-            <Button color="primary" onClick={handleCancel} disabled={isLoading}/>
-        </Grid>
-    )
-}
-
-const PostJsonDetail = ({id}: { id: string }) => {
-    const {data: post} = useGetPostQuery(id)
-
-    return (
-        <Box sx={{
-            width: 300,
-            height: 300,
-            backgroundColor: 'primary.dark',
-            '&:hover': {
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-            },
-        }}>
-            <pre>{JSON.stringify(post, null, 2)}</pre>
-        </Box>
-    )
-}
 
 function TransitionRight(props: JSX.IntrinsicAttributes & SlideProps) {
     return <Slide {...props} direction="right"/>;
