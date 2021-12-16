@@ -1,13 +1,18 @@
 import React, {useState} from "react";
 import {Post, useAddPostMutation} from "../../services/posts";
-import {Button, FormControl, FormLabel, Stack, TextField} from "@mui/material";
-
+import {Button, FormControl, FormLabel, IconButton, Snackbar, Stack, TextField} from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 const AddPost = () => {
     const initialValue = {name: ''}
     const [post, setPost] = useState<Pick<Post, 'name'>>(initialValue)
     const [addPost, {isLoading}] = useAddPostMutation()
+    const [error, setError] = useState(false);
+    const [open, setOpen] = React.useState(false)
 
+    const handleClose = () => {
+        setOpen(false);
+    };
     const handleChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
         setPost((prev) => ({
             ...prev,
@@ -15,16 +20,37 @@ const AddPost = () => {
         }))
     }
 
+    const action = (
+        <React.Fragment>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small"/>
+            </IconButton>
+        </React.Fragment>
+    );
+
     const handleAddPost = async () => {
         try {
-            await addPost(post).unwrap()
-            setPost(initialValue)
+            if (post.name.length === 0) {
+                alert("Please provide post name");
+                setError(true);
+                return
+            } else {
+                await addPost(post).unwrap()
+                setPost(initialValue)
+            }
+
         } catch {
             console.log("An error occured");
+            setError(true);
         }
     }
-
     return (
+
         <Stack
             direction="row-reverse"
             justifyContent="space-evenly"
@@ -41,6 +67,7 @@ const AddPost = () => {
                         placeholder="Enter post name"
                         value={post.name}
                         onChange={handleChange}
+
                     />
                 </div>
                 <div className="AddPosts-submit">
@@ -51,7 +78,18 @@ const AddPost = () => {
                         Add Post
                     </Button>
                 </div>
-
+                <div className="AddPosts-error">
+                    {
+                        error ?
+                            <Snackbar
+                                open={open}
+                                autoHideDuration={6000}
+                                onClose={handleClose}
+                                action={action}
+                                message="Please enter post name"
+                            /> : null
+                    }
+                </div>
             </FormControl>
         </Stack>
     )

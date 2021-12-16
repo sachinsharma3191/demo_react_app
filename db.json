@@ -1,28 +1,12 @@
 {
   "posts": [
     {
-      "id": 1,
-      "name": "test post"
+      "name": "test post",
+      "id": 1
     },
     {
-      "name": "hello",
-      "id": 3
-    },
-    {
-      "name": "china",
-      "id": 4
-    },
-    {
-      "name": "value been inserted",
-      "id": 5
-    },
-    {
-      "name": "hello",
-      "id": 6
-    },
-    {
-      "name": "hello",
-      "id": 7
+      "name": "test post 2",
+      "id": 2
     }
   ]
 }
