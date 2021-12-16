@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {styled} from '@mui/material/styles';
 import {useHistory, useParams} from "react-router-dom";
-import {useDeletePostMutation, useGetPostQuery, useUpdatePostMutation,} from '../../services/posts';
+import {useDeletePostMutation, useGetPostQuery, useUpdatePostMutation,} from '../../store/posts-store';
 import {Button, Grid, Paper, Stack,} from '@mui/material';
 import PostJsonDetail from './PostJsonDetail';
 import EditablePostName from "./EditPost";

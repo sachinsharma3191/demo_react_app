@@ -1,4 +1,4 @@
-import {useGetPostsQuery} from "../../services/posts";
+import {useGetPostsQuery} from "../../store/posts-store";
 import {Grid} from "@mui/material";
 import React from "react";
 

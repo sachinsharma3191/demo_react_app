@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {Post, useAddPostMutation} from "../../services/posts";
+import { useAddPostMutation} from "../../store/posts-store";
+import {Post} from '../../model/post'
 import {Button, FormControl, FormLabel, IconButton, Snackbar, Stack, TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 

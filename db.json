@@ -1,12 +1,12 @@
 {
   "posts": [
     {
-      "name": "test post",
-      "id": 1
+      "id": "1",
+      "name": "test post"
     },
     {
-      "name": "test post 2",
-      "id": 2
+      "id": "2",
+      "name": "test post 2"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import {useGetPostsQuery} from "../../services/posts";
+import {useGetPostsQuery} from "../../store/posts-store";
 import {Link, useHistory} from "react-router-dom";
 import {List, ListItem, Typography} from "@mui/material";
 import React from "react";
