@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {styled} from '@mui/material/styles';
 import {useHistory, useParams} from "react-router-dom";
 import {useDeletePostMutation, useGetPostQuery, useUpdatePostMutation,} from '../../services/posts';
-import {Button, Grid, Paper, Slide, SlideProps, Stack,} from '@mui/material';
+import {Button, Grid, Paper, Stack,} from '@mui/material';
 import PostJsonDetail from './PostJsonDetail';
 import EditablePostName from "./EditPost";
 
@@ -14,15 +14,9 @@ const Item = styled(Paper)(({theme}) => ({
 }));
 
 
-function TransitionRight(props: JSX.IntrinsicAttributes & SlideProps) {
-    return <Slide {...props} direction="right"/>;
-}
-
 export const PostDetail = () => {
     const {id} = useParams<{ id: any }>()
     const {push} = useHistory()
-
-    // const toast = useToast()
 
     const [isEditing, setIsEditing] = useState(false)
 
